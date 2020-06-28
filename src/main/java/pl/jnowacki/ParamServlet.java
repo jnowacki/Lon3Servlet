@@ -14,13 +14,20 @@ public class ParamServlet extends HttpServlet {
 //    zadanie:
 //    1. pobrac 3 paramsy (a, b, dzialanie) + parsowanie D
 //    2. sprawdzić czy paramsy są obecne D
-//    3. obsłużyć sytuację, gdy argumenty nie są liczbami
+//    3. obsłużyć sytuację, gdy argumenty nie są liczbami D
 //    4. obliczyć i wyswietlic wynik D
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        int a = Integer.parseInt(req.getParameter("a"));
-        int b = Integer.parseInt(req.getParameter("b"));
+        int a, b;
+
+        try {
+            a = Integer.parseInt(req.getParameter("a"));
+            b = Integer.parseInt(req.getParameter("b"));
+        } catch (NumberFormatException ex) {
+            resp.getWriter().println("Argument format not recognized, try again!");
+            return;
+        }
 
         String action = req.getParameter("action");
 
