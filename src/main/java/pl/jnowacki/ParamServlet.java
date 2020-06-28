@@ -6,23 +6,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Objects;
 
 @WebServlet("/myParams")
 public class ParamServlet extends HttpServlet {
 
 //    zadanie:
-//    1. pobrac 3 paramsy (a, b, dzialanie) + parsowanie
-//    2. sprawdzić czy paramsy są obecne
+//    1. pobrac 3 paramsy (a, b, dzialanie) + parsowanie D
+//    2. sprawdzić czy paramsy są obecne D
 //    3. obsłużyć sytuację, gdy argumenty nie są liczbami
-//    4. obliczyć i wyswietlic wynik
+//    4. obliczyć i wyswietlic wynik D
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String a = req.getParameter("a");
+        int a = Integer.parseInt(req.getParameter("a"));
+        int b = Integer.parseInt(req.getParameter("b"));
 
-        resp.getWriter().println(a);
+        String action = req.getParameter("action");
+
+        if(Objects.isNull(action)) {
+            resp.getWriter().println("Unknown action");
+            return;
+        }
+
+        switch (action) {
+            case "add":
+                resp.getWriter().println("Result: " + (a + b));
+                break;
+            case "sub":
+                resp.getWriter().println("Result: " + (a - b));
+                break;
+            default:
+                resp.getWriter().println("Unknown action");
+        }
 
     }
 }
