@@ -12,12 +12,17 @@ import java.util.Arrays;
 @WebServlet("/myParams")
 public class ParamServlet extends HttpServlet {
 
-//    zadanie: pobrac 3 paramsy (a, b, dzialanie), wyswietlic wynik
-//    * wyswietlic komunikat, gdy liczba nie jest calkowita/nie jest liczba
+//    zadanie:
+//    1. pobrac 3 paramsy (a, b, dzialanie) + parsowanie
+//    2. sprawdzić czy paramsy są obecne
+//    3. obsłużyć sytuację, gdy argumenty nie są liczbami
+//    4. obliczyć i wyswietlic wynik
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String param1 = req.getParameter("param1");
 
-        resp.getWriter().println(param1);
+        String a = req.getParameter("a");
+
+        resp.getWriter().println(a);
+
     }
 }
